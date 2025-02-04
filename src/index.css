@@ -1,0 +1,411 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  }
+}
+
+@layer components {
+  button {
+    @apply transition-all duration-200;
+    @apply p-1.5 rounded hover:bg-opacity-80; /* Consistent hover effect */
+    color: var(--text-primary); /* Ensure text color is consistent */
+  }
+
+  button:hover {
+    @apply transform scale-105;
+    box-shadow: 0 0 10px rgba(0, 174, 239, 0.3);
+  }
+
+  button:active {
+    @apply transform scale-95;
+  }
+}
+
+/* Custom scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1E1E1E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4A4A4A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Editor placeholder */
+[contenteditable][data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: #666;
+  cursor: text;
+}
+
+/* Editor content styles */
+[contenteditable] {
+  line-height: 1.5;
+}
+
+[contenteditable] h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+}
+
+[contenteditable] h2 {
+  font-size: 1.5em;
+  margin: 0.75em 0;
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+}
+
+[contenteditable] h3 {
+  font-size: 1.17em;
+  margin: 0.83em 0;
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+}
+
+[contenteditable] p {
+  margin: 1em 0;
+  font-family: 'Inter', sans-serif;
+}
+
+[contenteditable] ul,
+[contenteditable] ol {
+  margin: 1em 0;
+  padding-left: 40px;
+}
+
+[contenteditable] ul {
+  list-style-type: disc;
+}
+
+[contenteditable] ol {
+  list-style-type: decimal;
+}
+
+[contenteditable] table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  width: 100%;
+}
+
+[contenteditable] td,
+[contenteditable] th {
+  border: 1px solid #666;
+  padding: 8px;
+}
+
+[contenteditable] img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Glassmorphism effects */
+.glass-effect {
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Custom button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #0078D4, #00AEEF);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #00AEEF, #0078D4);
+  box-shadow: 0 0 15px rgba(0, 174, 239, 0.4);
+}
+
+/* Success and error states */
+.success {
+  color: #4CAF50;
+}
+
+.error {
+  color: #FF4C4C;
+}
+
+/* Add after existing styles */
+
+.gradient-button {
+  background: linear-gradient(135deg, #FF69B4, #9370DB);
+  transition: all 0.3s ease;
+}
+
+.gradient-button:hover {
+  background: linear-gradient(135deg, #9370DB, #4169E1);
+  transform: translateY(-2px);
+}
+
+.tool-button {
+  @apply p-2 rounded-lg transition-all duration-200 hover:bg-opacity-80 
+         hover:transform hover:scale-105 bg-opacity-50;
+}
+
+.tool-button.active {
+  @apply bg-pink-600 bg-opacity-100;
+}
+
+.pdf-annotation {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.color-picker {
+  @apply fixed left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-b from-pink-600 to-purple-600 p-3 rounded-lg shadow-xl;
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1A3F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FF69B4, #9370DB);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9370DB, #4169E1);
+}
+
+/* PDF viewer styles */
+.react-pdf__Page {
+  position: relative;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.react-pdf__Page canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* PDF controls container */
+.pdf-controls {
+  @apply fixed bottom-4 right-4 bg-[#1A1A3F] p-3 rounded-lg shadow-xl
+         flex flex-col space-y-2 backdrop-blur-sm bg-opacity-90;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  @apply flex items-center space-x-2 text-sm font-medium;
+}
+
+.zoom-button {
+  @apply p-1 rounded-md hover:bg-purple-700 transition-colors
+         flex items-center justify-center min-w-[24px];
+}
+
+/* Add after existing styles */
+.prose {
+  font-family: var(--font-family, 'Inter, sans-serif');
+  line-height: 1.6;
+  font-size: var(--font-size, 16px);
+  color: var(--text-color, #E5E7EB);
+}
+
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+.prose h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.25em;
+  margin-top: 0;
+  margin-bottom: 0.8em;
+  line-height: 1.2;
+}
+
+.prose h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  margin-top: 1.6em;
+  margin-bottom: 0.8em;
+  line-height: 1.4;
+}
+
+.prose ul, .prose ol {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose a {
+  color: #60A5FA;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose blockquote {
+  font-style: italic;
+  border-left: 4px solid #4B5563;
+  padding-left: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* PDF viewer container */
+.react-pdf__Document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.react-pdf__Page {
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.react-pdf__message {
+  padding: 1rem;
+  color: #374151;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Light Mode Styles */
+.light-mode {
+  --bg-primary: #F8F8F8; /* Soft Off-White */
+  --text-primary: #000000; /* Pure Black */
+  --border-color: #D1D1D1; /* Light Grey for borders */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for light mode */
+}
+
+.light-mode .prose {
+  color: var(--text-primary);
+}
+
+.light-mode [contenteditable] {
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color); /* Add border to document */
+  background-color: var(--bg-primary); /* Set background color */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+/* Document Container */
+.document-container {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .document-container {
+    padding: 15px;
+    max-width: 90%;
+  }
+}
+
+/* Update button styles for light mode */
+.light-mode button:hover {
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+}
+
+/* Update editor styles for light mode */
+.light-mode [contenteditable] {
+  color: var(--text-primary);
+}
+
+.light-mode [contenteditable][data-placeholder]:empty:before {
+  color: #9ca3af;
+}
+
+/* Update scrollbar for light mode */
+.light-mode ::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+}
+
+.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+[contenteditable] {
+  color: var(--text-color, #E5E7EB);
+}
+
+.light-mode [contenteditable],
+.light-mode .prose {
+  --text-color: #000000;
+}
+
+/* Ensure navbar remains unchanged */
+.navbar {
+  background-color: transparent; /* Keep navbar consistent */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column; /* Stack toolbar items */
+  }
+
+  .document-container {
+    padding: 10px;
+    max-width: 95%;
+  }
+
+  .fixed-toolbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-primary);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
