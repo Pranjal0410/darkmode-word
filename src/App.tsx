@@ -23,8 +23,8 @@ import {
   Highlighter,
   Eraser
 } from 'lucide-react';
-import html2pdf from 'html2pdf.js';
 import { jsPDF } from 'jspdf';
+import PDFEditor from './components/PDFEditor';
 
 // Initialize PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -59,7 +59,8 @@ function App() {
     pink: '#FF69B4',
     purple: '#9370DB',
     blue: '#4169E1',
-    cyan: '#00CED1'
+    cyan: '#00CED1',
+    white: '#FFFFFF'
   };
 
   // Add these font options at the top of the App component
@@ -311,7 +312,14 @@ function App() {
     document.body.classList.toggle('light-mode', !darkMode);
   };
 
-  
+  // Add this function to handle color selection
+  const handleColorSelect = (color: string) => {
+    setActiveColor(color);
+    // Apply the selected color to the text editor or drawing tool
+    if (editorRef.current) {
+      editorRef.current.style.color = color; // For text color
+    }
+  };
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-[#0A0A1F] text-gray-100' : 'light-mode'}`}>
@@ -481,7 +489,7 @@ function App() {
       )}
 
       {/* Tool Panel */}
-      <div className="fixed left-0 top-1/2 transform -translate-y-1/2 bg-[#1A1A3F] p-3 rounded-r-lg shadow-xl">
+      <div className="fixed left-0 top-1/2 transform -translate-y-1/2 bg-[#1A1A3F] p-3 rounded-r-lg shadow-xl md:flex md:flex-col md:space-y-4 hidden md:block">
         <div className="flex flex-col space-y-4">
           {Object.entries(colors).map(([name, color]) => (
             <button
@@ -490,10 +498,24 @@ function App() {
                 activeColor === color ? 'scale-110 ring-2 ring-white' : ''
               }`}
               style={{ backgroundColor: color }}
-              onClick={() => setActiveColor(color)}
+              onClick={() => handleColorSelect(color)}
             />
           ))}
         </div>
+      </div>
+
+      {/* Responsive color palette for small screens */}
+      <div className="flex md:hidden fixed bottom-4 left-4 bg-[#1A1A3F] p-3 rounded-lg shadow-xl">
+        {Object.entries(colors).map(([name, color]) => (
+          <button
+            key={name}
+            className={`w-8 h-8 rounded-full transition-transform ${
+              activeColor === color ? 'scale-110 ring-2 ring-white' : ''
+            }`}
+            style={{ backgroundColor: color }}
+            onClick={() => handleColorSelect(color)}
+          />
+        ))}
       </div>
 
       {/* Main Content Area */}
@@ -569,6 +591,8 @@ function App() {
           {isSaving ? 'Saving...' : 'All changes saved'}
         </div>
       </div>
+
+      <PDFEditor />
     </div>
   );
 }
