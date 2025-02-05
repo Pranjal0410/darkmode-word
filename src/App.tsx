@@ -489,12 +489,12 @@ function App() {
       )}
 
       {/* Tool Panel */}
-      <div className="fixed left-0 top-1/2 transform -translate-y-1/2 bg-[#1A1A3F] p-3 rounded-r-lg shadow-xl md:flex md:flex-col md:space-y-4 hidden md:block">
+      <div className="fixed left-0 top-1/2 transform -translate-y-1/2 bg-[#1A1A3F] p-3 rounded-r-lg shadow-xl">
         <div className="flex flex-col space-y-4">
           {Object.entries(colors).map(([name, color]) => (
             <button
               key={name}
-              className={`w-8 h-8 rounded-full transition-transform ${
+              className={`w-6 h-6 md:w-8 md:h-8 rounded-full transition-transform ${
                 activeColor === color ? 'scale-110 ring-2 ring-white' : ''
               }`}
               style={{ backgroundColor: color }}
@@ -502,20 +502,6 @@ function App() {
             />
           ))}
         </div>
-      </div>
-
-      {/* Responsive color palette for small screens */}
-      <div className="flex md:hidden fixed bottom-4 left-4 bg-[#1A1A3F] p-3 rounded-lg shadow-xl">
-        {Object.entries(colors).map(([name, color]) => (
-          <button
-            key={name}
-            className={`w-8 h-8 rounded-full transition-transform ${
-              activeColor === color ? 'scale-110 ring-2 ring-white' : ''
-            }`}
-            style={{ backgroundColor: color }}
-            onClick={() => handleColorSelect(color)}
-          />
-        ))}
       </div>
 
       {/* Main Content Area */}
